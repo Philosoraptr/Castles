@@ -8,6 +8,7 @@ public class CastleScript : MonoBehaviour {
 	public float period = 0.1f;
 	public int castleHP;
 	public Text castleHPText;
+	public GameObject unitPref;
 
 	private float nextActionTime = 0.0f;
 
@@ -19,13 +20,13 @@ public class CastleScript : MonoBehaviour {
 		if(enemyCastle || playerCastle) {
 			if (Time.time > nextActionTime){
 				nextActionTime = Time.time + period;
-				CastleHPIncrease();
+				AdjustCastleHP(1);
 			}
 		}
 	}
 
-	void CastleHPIncrease() {
-		castleHP += 1;
+	void AdjustCastleHP(int hpIncrement) {
+		castleHP += hpIncrement;
 		castleHPText.text = castleHP.ToString();
 	}
 
@@ -43,4 +44,23 @@ public class CastleScript : MonoBehaviour {
 			}
 		}
 	}
+
+	void SpawnUnits(/*target*/){
+		AdjustCastleHP(-(castleHP/2));
+		GameObject unit = Instantiate(unitPref) as GameObject;
+		unit.transform.position.x = this.transform.position.x + this.transform.//width
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
