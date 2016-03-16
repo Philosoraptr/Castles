@@ -45,10 +45,13 @@ public class CastleScript : MonoBehaviour {
 		}
 	}
 
-	void SpawnUnits(/*target*/){
+	void SpawnUnits(Gameobject enemyCastleObj){
 		AdjustCastleHP(-(castleHP/2));
 		GameObject unit = Instantiate(unitPref) as GameObject;
-		unit.transform.position.x = this.transform.position.x + this.transform.//width
+		unit.transform.position = new vector2(this.transform.position.x + this.collider2d.size.x, this.transform.position.y, this.collider2d.size.y);
+		unit.transform.position.MoveTowards(New Vector2(unit.transform.position.x, unit.transform.position.y), enemyCastleObj.transform.position, 3 * Time.deltaTime);
+		//unit.transform.position.movetowards(unit.transform.position, castle2.position, 3 * Time.deltaTime);
+		//Vector2 MoveTowards(Vector2 current, Vector2 target, float maxDistanceDelta); 
 	}
 }
 
