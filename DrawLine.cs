@@ -59,8 +59,11 @@ public class DrawLine : MonoBehaviour {
 			if(hit.collider.gameObject.tag == "Castle"){
 				if(hit.collider.gameObject.GetComponent<CastleScript>().playerCastle){
 					playerCastleTouched = true;
+					New GameObject playerCastle = hit.collider.gameObject;
 				} else if(hit.collider.gameObject.GetComponent<CastleScript>().enemyCastle && playerCastleTouched){
 					Debug.Log("Correct Drag");
+					New GameObject enemyCastle = hit.collider.gameObject;
+					//Call script for moving units to other enemy castle
 					playerCastleTouched = false;
 				}
 			}
