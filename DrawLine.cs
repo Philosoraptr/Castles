@@ -4,9 +4,11 @@ using System.Collections.Generic;
 
 public class DrawLine : MonoBehaviour {
 	public bool playerCastleTouched;
+	public List<Vector3> pointsList;
+	private GameObject playerCastle;
+	private GameObject enemyCastle;
 	private LineRenderer line;
 	private bool isMousePressed;
-	public List<Vector3> pointsList;
 	private Vector3 mousePos;
 	
 	// Structure for line points
@@ -59,10 +61,10 @@ public class DrawLine : MonoBehaviour {
 			if(hit.collider.gameObject.tag == "Castle"){
 				if(hit.collider.gameObject.GetComponent<CastleScript>().playerCastle){
 					playerCastleTouched = true;
-					New GameObject playerCastle = hit.collider.gameObject;
+					playerCastle = hit.collider.gameObject;
 				} else if(hit.collider.gameObject.GetComponent<CastleScript>().enemyCastle && playerCastleTouched){
 					Debug.Log("Correct Drag");
-					New GameObject enemyCastle = hit.collider.gameObject;
+					enemyCastle = hit.collider.gameObject;
 					playerCastle.GetComponent<CastleScript>().SpawnUnits(enemyCastle);
 					playerCastleTouched = false;
 				}
