@@ -45,7 +45,7 @@ public class CastleScript : MonoBehaviour {
 		}
 	}
 
-	void SpawnUnits(Gameobject enemyCastleObj){
+	public void SpawnUnits(Gameobject enemyCastleObj){
 		AdjustCastleHP(-(castleHP/2));
 		GameObject unit = Instantiate(unitPref) as GameObject;
 		unit.transform.position = new vector2(this.transform.position.x + this.collider2d.size.x, this.transform.position.y, this.collider2d.size.y);
