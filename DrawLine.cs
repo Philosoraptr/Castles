@@ -63,7 +63,7 @@ public class DrawLine : MonoBehaviour {
 				} else if(hit.collider.gameObject.GetComponent<CastleScript>().enemyCastle && playerCastleTouched){
 					Debug.Log("Correct Drag");
 					New GameObject enemyCastle = hit.collider.gameObject;
-					//Call script for moving units to other enemy castle
+					playerCastle.GetComponent<CastleScript>().SpawnUnits(enemyCastle);
 					playerCastleTouched = false;
 				}
 			}
