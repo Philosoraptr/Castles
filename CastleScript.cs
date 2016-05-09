@@ -5,7 +5,7 @@ using System.Collections;
 public class CastleScript : MonoBehaviour {
 	public bool enemyCastle;
 	public bool playerCastle;
-	public float period = 0.1f;
+	public float period = 1.0f;
 	public int castleHP;
 	public Text castleHPText;
 	public GameObject unitPref;
@@ -13,7 +13,7 @@ public class CastleScript : MonoBehaviour {
 	private float nextActionTime = 0.0f;
 
 	void Start () {
-	
+		castleHP = 0;
 	}
 
 	void Update () {
@@ -25,7 +25,7 @@ public class CastleScript : MonoBehaviour {
 		}
 	}
 
-	void AdjustCastleHP(int hpIncrement) {
+	public void AdjustCastleHP(int hpIncrement) {
 		castleHP += hpIncrement;
 		castleHPText.text = castleHP.ToString();
 	}
@@ -45,15 +45,13 @@ public class CastleScript : MonoBehaviour {
 		}
 	}
 
-	public void SpawnUnits(GameObject enemyCastleObj){
+	public IEnumerator SpawnUnits(GameObject enemyCastleObj, float waitTime){
 		int unitSpawnCount = castleHP/2;
 		AdjustCastleHP(-unitSpawnCount);
 		for (int i = 0; i <= unitSpawnCount; i++){
+			yield return new WaitForSeconds(waitTime);
 			GameObject unit = Instantiate(unitPref) as GameObject;
-			unit.transform.position = new Vector2(this.transform.position.x + this.collider2d.size.x, this.transform.position.y + this.collider2d.size.y);
-			unit.transform.position.MoveTowards(new Vector2(unit.transform.position.x, unit.transform.position.y), enemyCastleObj.transform.position, 3 * Time.deltaTime);
-			//unit.transform.position.movetowards(unit.transform.position, castle2.position, 3 * Time.deltaTime);
-			//Vector2 MoveTowards(Vector2 current, Vector2 target, float maxDistanceDelta); 	
+			unit.GetComponent<UnitController>().SetTargetCastle(gameObject, enemyCastleObj);
 		}
 	}
 }

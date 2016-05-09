@@ -65,7 +65,7 @@ public class DrawLine : MonoBehaviour {
 				} else if(hit.collider.gameObject.GetComponent<CastleScript>().enemyCastle && playerCastleTouched){
 					Debug.Log("Correct Drag");
 					enemyCastle = hit.collider.gameObject;
-					playerCastle.GetComponent<CastleScript>().SpawnUnits(enemyCastle);
+					StartCoroutine(playerCastle.GetComponent<CastleScript>().SpawnUnits(enemyCastle, 0.8f));
 					playerCastleTouched = false;
 				}
 			}
